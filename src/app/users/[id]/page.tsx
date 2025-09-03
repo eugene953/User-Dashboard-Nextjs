@@ -1,19 +1,25 @@
+
+
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { fetchUser } from "@/lib/api";
 import MotionSection from "@/components/MotionSection";
 
-type UserDetailsProps = {
-  params: { id: string };
+type UserDetailsPageProps = {
+  params: Promise<{
+    id: string;
+  }>;
 };
 
-export default async function UserDetails({ params }: UserDetailsProps) {
-  const user = await fetchUser(params.id);
+
+export default async function UserDetails({ params }:  UserDetailsPageProps) {
+ const { id } = await params;
+  const user = await fetchUser(id);
 
   return (
     <main className="min-h-screen p-6 sm:p-10 bg-slate-50">
       <div className="mx-auto max-w-5xl">
-        {/* Back button with icon */}
+     
         <Link
           href="/users"
           className="inline-flex  items-center gap-2 text-base sm:text-lg font-medium text-slate-700 hover:text-slate-900 transition"
