@@ -3,7 +3,11 @@ import { ArrowLeft } from "lucide-react";
 import { fetchUser } from "@/lib/api";
 import MotionSection from "@/components/MotionSection";
 
-export default async function UserDetails({ params }: { params: { id: string } }) {
+type UserDetailsProps = {
+  params: { id: string };
+};
+
+export default async function UserDetails({ params }: UserDetailsProps) {
   const user = await fetchUser(params.id);
 
   return (
